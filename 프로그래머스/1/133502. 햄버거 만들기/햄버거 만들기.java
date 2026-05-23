@@ -1,13 +1,19 @@
 class Solution {
     public int solution(int[] ingredient) {
+        int[] stack = new int[ingredient.length];
+        int top = 0;
         int answer = 0;
-        StringBuilder sb = new StringBuilder();
         
-        for (int i = 0; i < ingredient.length; i++) {
-            sb.append(ingredient[i]);
-            if (sb.length() > 3 && sb.substring(sb.length() - 4, sb.length()).equals("1231")) {
-                answer++;
-                sb.delete(sb.length() - 4, sb.length());
+        for (int i : ingredient) {
+            stack[top++] = i;
+            
+            if (top >= 4) {
+                if (stack[top - 4] == 1 && stack[top - 3] == 2 &&
+                    stack[top - 2] == 3 && stack[top - 1] == 1) {
+                    
+                    top -= 4;
+                    answer++;
+                }
             }
         }
         
